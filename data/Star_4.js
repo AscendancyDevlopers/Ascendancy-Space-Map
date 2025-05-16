@@ -1,0 +1,1 @@
+var json_Star_4 = {"type":"FeatureCollection","name":"Star_4","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"id":"1","Name":"Sun"},"geometry":null},{"type":"Feature","properties":{"id":"2","Name":"Sol"},"geometry":{"type":"Point","coordinates":[-0.001340335497331,-0.019896814062287]}}]}
