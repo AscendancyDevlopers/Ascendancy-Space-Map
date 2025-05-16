@@ -1,3 +1,3 @@
-# Ascendancy-Maps
+# Ascendancy-Space-Map
 
-All Ascendancy Mapping Files
+Ascendancy Space Mapping files
