@@ -1,0 +1,1 @@
+var json_EnergySignature_9 = {"type":"FeatureCollection","name":"EnergySignature_9","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"id":"1","Name":"Unknown  Energy Signature"},"geometry":{"type":"Point","coordinates":[0.024597595202251,-0.01747442614349]}}]}

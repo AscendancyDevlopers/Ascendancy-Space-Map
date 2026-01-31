@@ -36,21 +36,22 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="data/UnionTerritory_0.js"></script>
-        <script src="data/Debris_1.js"></script>
-        <script src="data/AstroidField_2.js"></script>
-        <script src="data/HyperRoute_3.js"></script>
-        <script src="data/UnionMoons_4.js"></script>
-        <script src="data/UnionPlanets_5.js"></script>
-        <script src="data/GasGiant_6.js"></script>
-        <script src="data/Star_7.js"></script>
-        <script src="data/EnergySignature_8.js"></script>
-        <script src="data/FrontierStation_9.js"></script>
-        <script src="data/MiningStation_10.js"></script>
-        <script src="data/Grid_11.js"></script>
+        <script src="data/RepublicofAlkerrund_1.js"></script>
+        <script src="data/Debris_2.js"></script>
+        <script src="data/AstroidField_3.js"></script>
+        <script src="data/HyperRoute_4.js"></script>
+        <script src="data/UnionMoons_5.js"></script>
+        <script src="data/UnionPlanets_6.js"></script>
+        <script src="data/GasGiant_7.js"></script>
+        <script src="data/Star_8.js"></script>
+        <script src="data/EnergySignature_9.js"></script>
+        <script src="data/FrontierStation_10.js"></script>
+        <script src="data/MiningStation_11.js"></script>
+        <script src="data/Grid_12.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:false, maxZoom:26, minZoom:15
-        }).fitBounds([[-0.009522592856334507,0.018099305158597236],[-0.006311700819076708,0.02408027190960888]]);
+        }).fitBounds([[-0.009274680599362454,0.018618884238086754],[-0.0070170221367794215,0.022824251484891908]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -150,7 +151,49 @@
         });
         bounds_group.addLayer(layer_UnionTerritory_0);
         map.addLayer(layer_UnionTerritory_0);
-        function pop_Debris_1(feature, layer) {
+        function pop_RepublicofAlkerrund_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(String(feature.properties['id']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_RepublicofAlkerrund_1_0() {
+            return {
+                pane: 'pane_RepublicofAlkerrund_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(77,219,0,0.5)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_RepublicofAlkerrund_1');
+        map.getPane('pane_RepublicofAlkerrund_1').style.zIndex = 401;
+        map.getPane('pane_RepublicofAlkerrund_1').style['mix-blend-mode'] = 'normal';
+        var layer_RepublicofAlkerrund_1 = new L.geoJson(json_RepublicofAlkerrund_1, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_RepublicofAlkerrund_1',
+            layerName: 'layer_RepublicofAlkerrund_1',
+            pane: 'pane_RepublicofAlkerrund_1',
+            onEachFeature: pop_RepublicofAlkerrund_1,
+            style: style_RepublicofAlkerrund_1_0,
+        });
+        bounds_group.addLayer(layer_RepublicofAlkerrund_1);
+        map.addLayer(layer_RepublicofAlkerrund_1);
+        function pop_Debris_2(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Name</th>\
@@ -168,39 +211,39 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Debris_1_0() {
+        function style_Debris_2_0() {
             return {
-                pane: 'pane_Debris_1',
+                pane: 'pane_Debris_2',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/Debris_1.svg',
+            iconUrl: 'markers/Debris_2.svg',
             iconSize: [31.919999999999998, 31.919999999999998]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_Debris_1');
-        map.getPane('pane_Debris_1').style.zIndex = 401;
-        map.getPane('pane_Debris_1').style['mix-blend-mode'] = 'normal';
-        var layer_Debris_1 = new L.geoJson(json_Debris_1, {
+        map.createPane('pane_Debris_2');
+        map.getPane('pane_Debris_2').style.zIndex = 402;
+        map.getPane('pane_Debris_2').style['mix-blend-mode'] = 'normal';
+        var layer_Debris_2 = new L.geoJson(json_Debris_2, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Debris_1',
-            layerName: 'layer_Debris_1',
-            pane: 'pane_Debris_1',
-            onEachFeature: pop_Debris_1,
+            dataVar: 'json_Debris_2',
+            layerName: 'layer_Debris_2',
+            pane: 'pane_Debris_2',
+            onEachFeature: pop_Debris_2,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_Debris_1_0(feature));
+                return L.marker(latlng, style_Debris_2_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Debris_1);
-        map.addLayer(layer_Debris_1);
-        function pop_AstroidField_2(feature, layer) {
+        bounds_group.addLayer(layer_Debris_2);
+        map.addLayer(layer_Debris_2);
+        function pop_AstroidField_3(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Name</th>\
@@ -218,9 +261,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_AstroidField_2_0() {
+        function style_AstroidField_3_0() {
             return {
-                pane: 'pane_AstroidField_2',
+                pane: 'pane_AstroidField_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.8)',
                 dashArray: '',
@@ -233,21 +276,21 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_AstroidField_2');
-        map.getPane('pane_AstroidField_2').style.zIndex = 402;
-        map.getPane('pane_AstroidField_2').style['mix-blend-mode'] = 'normal';
-        var layer_AstroidField_2 = new L.geoJson(json_AstroidField_2, {
+        map.createPane('pane_AstroidField_3');
+        map.getPane('pane_AstroidField_3').style.zIndex = 403;
+        map.getPane('pane_AstroidField_3').style['mix-blend-mode'] = 'normal';
+        var layer_AstroidField_3 = new L.geoJson(json_AstroidField_3, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_AstroidField_2',
-            layerName: 'layer_AstroidField_2',
-            pane: 'pane_AstroidField_2',
-            onEachFeature: pop_AstroidField_2,
-            style: style_AstroidField_2_0,
+            dataVar: 'json_AstroidField_3',
+            layerName: 'layer_AstroidField_3',
+            pane: 'pane_AstroidField_3',
+            onEachFeature: pop_AstroidField_3,
+            style: style_AstroidField_3_0,
         });
-        bounds_group.addLayer(layer_AstroidField_2);
-        map.addLayer(layer_AstroidField_2);
-        function pop_HyperRoute_3(feature, layer) {
+        bounds_group.addLayer(layer_AstroidField_3);
+        map.addLayer(layer_AstroidField_3);
+        function pop_HyperRoute_4(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Name</th>\
@@ -265,9 +308,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_HyperRoute_3_0() {
+        function style_HyperRoute_4_0() {
             return {
-                pane: 'pane_HyperRoute_3',
+                pane: 'pane_HyperRoute_4',
                 opacity: 1,
                 color: 'rgba(56,167,1,1.0)',
                 dashArray: '',
@@ -278,21 +321,21 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_HyperRoute_3');
-        map.getPane('pane_HyperRoute_3').style.zIndex = 403;
-        map.getPane('pane_HyperRoute_3').style['mix-blend-mode'] = 'normal';
-        var layer_HyperRoute_3 = new L.geoJson(json_HyperRoute_3, {
+        map.createPane('pane_HyperRoute_4');
+        map.getPane('pane_HyperRoute_4').style.zIndex = 404;
+        map.getPane('pane_HyperRoute_4').style['mix-blend-mode'] = 'normal';
+        var layer_HyperRoute_4 = new L.geoJson(json_HyperRoute_4, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_HyperRoute_3',
-            layerName: 'layer_HyperRoute_3',
-            pane: 'pane_HyperRoute_3',
-            onEachFeature: pop_HyperRoute_3,
-            style: style_HyperRoute_3_0,
+            dataVar: 'json_HyperRoute_4',
+            layerName: 'layer_HyperRoute_4',
+            pane: 'pane_HyperRoute_4',
+            onEachFeature: pop_HyperRoute_4,
+            style: style_HyperRoute_4_0,
         });
-        bounds_group.addLayer(layer_HyperRoute_3);
-        map.addLayer(layer_HyperRoute_3);
-        function pop_UnionMoons_4(feature, layer) {
+        bounds_group.addLayer(layer_HyperRoute_4);
+        map.addLayer(layer_HyperRoute_4);
+        function pop_UnionMoons_5(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Name</th>\
@@ -310,9 +353,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_UnionMoons_4_0() {
+        function style_UnionMoons_5_0() {
             return {
-                pane: 'pane_UnionMoons_4',
+                pane: 'pane_UnionMoons_5',
                 radius: 12.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -326,27 +369,27 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_UnionMoons_4');
-        map.getPane('pane_UnionMoons_4').style.zIndex = 404;
-        map.getPane('pane_UnionMoons_4').style['mix-blend-mode'] = 'normal';
-        var layer_UnionMoons_4 = new L.geoJson(json_UnionMoons_4, {
+        map.createPane('pane_UnionMoons_5');
+        map.getPane('pane_UnionMoons_5').style.zIndex = 405;
+        map.getPane('pane_UnionMoons_5').style['mix-blend-mode'] = 'normal';
+        var layer_UnionMoons_5 = new L.geoJson(json_UnionMoons_5, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_UnionMoons_4',
-            layerName: 'layer_UnionMoons_4',
-            pane: 'pane_UnionMoons_4',
-            onEachFeature: pop_UnionMoons_4,
+            dataVar: 'json_UnionMoons_5',
+            layerName: 'layer_UnionMoons_5',
+            pane: 'pane_UnionMoons_5',
+            onEachFeature: pop_UnionMoons_5,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_UnionMoons_4_0(feature));
+                return L.circleMarker(latlng, style_UnionMoons_5_0(feature));
             },
         });
-        bounds_group.addLayer(layer_UnionMoons_4);
-        map.addLayer(layer_UnionMoons_4);
-        function pop_UnionPlanets_5(feature, layer) {
+        bounds_group.addLayer(layer_UnionMoons_5);
+        map.addLayer(layer_UnionMoons_5);
+        function pop_UnionPlanets_6(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Name</th>\
@@ -372,39 +415,39 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_UnionPlanets_5_0() {
+        function style_UnionPlanets_6_0() {
             return {
-                pane: 'pane_UnionPlanets_5',
+                pane: 'pane_UnionPlanets_6',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/UnionPlanets_5.svg',
+            iconUrl: 'markers/UnionPlanets_6.svg',
             iconSize: [76.0, 76.0]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_UnionPlanets_5');
-        map.getPane('pane_UnionPlanets_5').style.zIndex = 405;
-        map.getPane('pane_UnionPlanets_5').style['mix-blend-mode'] = 'normal';
-        var layer_UnionPlanets_5 = new L.geoJson(json_UnionPlanets_5, {
+        map.createPane('pane_UnionPlanets_6');
+        map.getPane('pane_UnionPlanets_6').style.zIndex = 406;
+        map.getPane('pane_UnionPlanets_6').style['mix-blend-mode'] = 'normal';
+        var layer_UnionPlanets_6 = new L.geoJson(json_UnionPlanets_6, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_UnionPlanets_5',
-            layerName: 'layer_UnionPlanets_5',
-            pane: 'pane_UnionPlanets_5',
-            onEachFeature: pop_UnionPlanets_5,
+            dataVar: 'json_UnionPlanets_6',
+            layerName: 'layer_UnionPlanets_6',
+            pane: 'pane_UnionPlanets_6',
+            onEachFeature: pop_UnionPlanets_6,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_UnionPlanets_5_0(feature));
+                return L.marker(latlng, style_UnionPlanets_6_0(feature));
             },
         });
-        bounds_group.addLayer(layer_UnionPlanets_5);
-        map.addLayer(layer_UnionPlanets_5);
-        function pop_GasGiant_6(feature, layer) {
+        bounds_group.addLayer(layer_UnionPlanets_6);
+        map.addLayer(layer_UnionPlanets_6);
+        function pop_GasGiant_7(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2"><strong>Name</strong><br />' + (feature.properties['Name'] !== null ? autolinker.link(String(feature.properties['Name']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
@@ -424,9 +467,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_GasGiant_6_0() {
+        function style_GasGiant_7_0() {
             return {
-                pane: 'pane_GasGiant_6',
+                pane: 'pane_GasGiant_7',
                 radius: 60.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -440,27 +483,27 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_GasGiant_6');
-        map.getPane('pane_GasGiant_6').style.zIndex = 406;
-        map.getPane('pane_GasGiant_6').style['mix-blend-mode'] = 'normal';
-        var layer_GasGiant_6 = new L.geoJson(json_GasGiant_6, {
+        map.createPane('pane_GasGiant_7');
+        map.getPane('pane_GasGiant_7').style.zIndex = 407;
+        map.getPane('pane_GasGiant_7').style['mix-blend-mode'] = 'normal';
+        var layer_GasGiant_7 = new L.geoJson(json_GasGiant_7, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_GasGiant_6',
-            layerName: 'layer_GasGiant_6',
-            pane: 'pane_GasGiant_6',
-            onEachFeature: pop_GasGiant_6,
+            dataVar: 'json_GasGiant_7',
+            layerName: 'layer_GasGiant_7',
+            pane: 'pane_GasGiant_7',
+            onEachFeature: pop_GasGiant_7,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_GasGiant_6_0(feature));
+                return L.circleMarker(latlng, style_GasGiant_7_0(feature));
             },
         });
-        bounds_group.addLayer(layer_GasGiant_6);
-        map.addLayer(layer_GasGiant_6);
-        function pop_Star_7(feature, layer) {
+        bounds_group.addLayer(layer_GasGiant_7);
+        map.addLayer(layer_GasGiant_7);
+        function pop_Star_8(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Name</th>\
@@ -474,9 +517,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Star_7_0() {
+        function style_Star_8_0() {
             return {
-                pane: 'pane_Star_7',
+                pane: 'pane_Star_8',
                 radius: 100.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -490,27 +533,27 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Star_7');
-        map.getPane('pane_Star_7').style.zIndex = 407;
-        map.getPane('pane_Star_7').style['mix-blend-mode'] = 'normal';
-        var layer_Star_7 = new L.geoJson(json_Star_7, {
+        map.createPane('pane_Star_8');
+        map.getPane('pane_Star_8').style.zIndex = 408;
+        map.getPane('pane_Star_8').style['mix-blend-mode'] = 'normal';
+        var layer_Star_8 = new L.geoJson(json_Star_8, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Star_7',
-            layerName: 'layer_Star_7',
-            pane: 'pane_Star_7',
-            onEachFeature: pop_Star_7,
+            dataVar: 'json_Star_8',
+            layerName: 'layer_Star_8',
+            pane: 'pane_Star_8',
+            onEachFeature: pop_Star_8,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_Star_7_0(feature));
+                return L.circleMarker(latlng, style_Star_8_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Star_7);
-        map.addLayer(layer_Star_7);
-        function pop_EnergySignature_8(feature, layer) {
+        bounds_group.addLayer(layer_Star_8);
+        map.addLayer(layer_Star_8);
+        function pop_EnergySignature_9(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Name</th>\
@@ -524,9 +567,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_EnergySignature_8_0() {
+        function style_EnergySignature_9_0() {
             return {
-                pane: 'pane_EnergySignature_8',
+                pane: 'pane_EnergySignature_9',
                 shape: 'triangle',
                 radius: 8.0,
                 opacity: 1,
@@ -541,27 +584,27 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_EnergySignature_8');
-        map.getPane('pane_EnergySignature_8').style.zIndex = 408;
-        map.getPane('pane_EnergySignature_8').style['mix-blend-mode'] = 'normal';
-        var layer_EnergySignature_8 = new L.geoJson(json_EnergySignature_8, {
+        map.createPane('pane_EnergySignature_9');
+        map.getPane('pane_EnergySignature_9').style.zIndex = 409;
+        map.getPane('pane_EnergySignature_9').style['mix-blend-mode'] = 'normal';
+        var layer_EnergySignature_9 = new L.geoJson(json_EnergySignature_9, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_EnergySignature_8',
-            layerName: 'layer_EnergySignature_8',
-            pane: 'pane_EnergySignature_8',
-            onEachFeature: pop_EnergySignature_8,
+            dataVar: 'json_EnergySignature_9',
+            layerName: 'layer_EnergySignature_9',
+            pane: 'pane_EnergySignature_9',
+            onEachFeature: pop_EnergySignature_9,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.shapeMarker(latlng, style_EnergySignature_8_0(feature));
+                return L.shapeMarker(latlng, style_EnergySignature_9_0(feature));
             },
         });
-        bounds_group.addLayer(layer_EnergySignature_8);
-        map.addLayer(layer_EnergySignature_8);
-        function pop_FrontierStation_9(feature, layer) {
+        bounds_group.addLayer(layer_EnergySignature_9);
+        map.addLayer(layer_EnergySignature_9);
+        function pop_FrontierStation_10(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Name</th>\
@@ -583,39 +626,39 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_FrontierStation_9_0() {
+        function style_FrontierStation_10_0() {
             return {
-                pane: 'pane_FrontierStation_9',
+                pane: 'pane_FrontierStation_10',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/FrontierStation_9.svg',
+            iconUrl: 'markers/FrontierStation_10.svg',
             iconSize: [95.0, 95.0]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_FrontierStation_9');
-        map.getPane('pane_FrontierStation_9').style.zIndex = 409;
-        map.getPane('pane_FrontierStation_9').style['mix-blend-mode'] = 'normal';
-        var layer_FrontierStation_9 = new L.geoJson(json_FrontierStation_9, {
+        map.createPane('pane_FrontierStation_10');
+        map.getPane('pane_FrontierStation_10').style.zIndex = 410;
+        map.getPane('pane_FrontierStation_10').style['mix-blend-mode'] = 'normal';
+        var layer_FrontierStation_10 = new L.geoJson(json_FrontierStation_10, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_FrontierStation_9',
-            layerName: 'layer_FrontierStation_9',
-            pane: 'pane_FrontierStation_9',
-            onEachFeature: pop_FrontierStation_9,
+            dataVar: 'json_FrontierStation_10',
+            layerName: 'layer_FrontierStation_10',
+            pane: 'pane_FrontierStation_10',
+            onEachFeature: pop_FrontierStation_10,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_FrontierStation_9_0(feature));
+                return L.marker(latlng, style_FrontierStation_10_0(feature));
             },
         });
-        bounds_group.addLayer(layer_FrontierStation_9);
-        map.addLayer(layer_FrontierStation_9);
-        function pop_MiningStation_10(feature, layer) {
+        bounds_group.addLayer(layer_FrontierStation_10);
+        map.addLayer(layer_FrontierStation_10);
+        function pop_MiningStation_11(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Name</th>\
@@ -633,39 +676,39 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_MiningStation_10_0() {
+        function style_MiningStation_11_0() {
             return {
-                pane: 'pane_MiningStation_10',
+                pane: 'pane_MiningStation_11',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/MiningStation_10.svg',
+            iconUrl: 'markers/MiningStation_11.svg',
             iconSize: [95.0, 95.0]
         }),
                 interactive: true,
             }
         }
-        map.createPane('pane_MiningStation_10');
-        map.getPane('pane_MiningStation_10').style.zIndex = 410;
-        map.getPane('pane_MiningStation_10').style['mix-blend-mode'] = 'normal';
-        var layer_MiningStation_10 = new L.geoJson(json_MiningStation_10, {
+        map.createPane('pane_MiningStation_11');
+        map.getPane('pane_MiningStation_11').style.zIndex = 411;
+        map.getPane('pane_MiningStation_11').style['mix-blend-mode'] = 'normal';
+        var layer_MiningStation_11 = new L.geoJson(json_MiningStation_11, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_MiningStation_10',
-            layerName: 'layer_MiningStation_10',
-            pane: 'pane_MiningStation_10',
-            onEachFeature: pop_MiningStation_10,
+            dataVar: 'json_MiningStation_11',
+            layerName: 'layer_MiningStation_11',
+            pane: 'pane_MiningStation_11',
+            onEachFeature: pop_MiningStation_11,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.marker(latlng, style_MiningStation_10_0(feature));
+                return L.marker(latlng, style_MiningStation_11_0(feature));
             },
         });
-        bounds_group.addLayer(layer_MiningStation_10);
-        map.addLayer(layer_MiningStation_10);
-        function pop_Grid_11(feature, layer) {
+        bounds_group.addLayer(layer_MiningStation_11);
+        map.addLayer(layer_MiningStation_11);
+        function pop_Grid_12(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(String(feature.properties['fid']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
@@ -693,9 +736,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Grid_11_0() {
+        function style_Grid_12_0() {
             return {
-                pane: 'pane_Grid_11',
+                pane: 'pane_Grid_12',
                 opacity: 1,
                 color: 'rgba(216,125,43,0.45098039215686275)',
                 dashArray: '',
@@ -706,36 +749,37 @@
                 interactive: false,
             }
         }
-        map.createPane('pane_Grid_11');
-        map.getPane('pane_Grid_11').style.zIndex = 411;
-        map.getPane('pane_Grid_11').style['mix-blend-mode'] = 'normal';
-        var layer_Grid_11 = new L.geoJson(json_Grid_11, {
+        map.createPane('pane_Grid_12');
+        map.getPane('pane_Grid_12').style.zIndex = 412;
+        map.getPane('pane_Grid_12').style['mix-blend-mode'] = 'normal';
+        var layer_Grid_12 = new L.geoJson(json_Grid_12, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Grid_11',
-            layerName: 'layer_Grid_11',
-            pane: 'pane_Grid_11',
-            onEachFeature: pop_Grid_11,
-            style: style_Grid_11_0,
+            dataVar: 'json_Grid_12',
+            layerName: 'layer_Grid_12',
+            pane: 'pane_Grid_12',
+            onEachFeature: pop_Grid_12,
+            style: style_Grid_12_0,
         });
-        bounds_group.addLayer(layer_Grid_11);
-        map.addLayer(layer_Grid_11);
+        bounds_group.addLayer(layer_Grid_12);
+        map.addLayer(layer_Grid_12);
         var overlaysTree = [
         {label: '<b>Map Overlays</b>',  selectAllCheckbox: true, children: [
-            {label: '<img src="legend/Grid_11.png" /> Grid', layer: layer_Grid_11},]},
+            {label: '<img src="legend/Grid_12.png" /> Grid', layer: layer_Grid_12},]},
         {label: '<b>Infrastructure</b>',  selectAllCheckbox: true, children: [
-            {label: '<img src="legend/MiningStation_10.png" /> Mining Station', layer: layer_MiningStation_10},
-            {label: '<img src="legend/FrontierStation_9.png" /> Frontier Station', layer: layer_FrontierStation_9},
-            {label: '<img src="legend/EnergySignature_8.png" /> Energy Signature', layer: layer_EnergySignature_8},]},
+            {label: '<img src="legend/MiningStation_11.png" /> Mining Station', layer: layer_MiningStation_11},
+            {label: '<img src="legend/FrontierStation_10.png" /> Frontier Station', layer: layer_FrontierStation_10},
+            {label: '<img src="legend/EnergySignature_9.png" /> Energy Signature', layer: layer_EnergySignature_9},]},
         {label: '<b>Celestials & Debris</b>',  selectAllCheckbox: true, children: [
-            {label: '<img src="legend/Star_7.png" /> Star', layer: layer_Star_7},
-            {label: '<img src="legend/GasGiant_6.png" /> Gas Giant', layer: layer_GasGiant_6},
-            {label: '<img src="legend/UnionPlanets_5.png" /> Union Planets', layer: layer_UnionPlanets_5},
-            {label: '<img src="legend/UnionMoons_4.png" /> Union Moons', layer: layer_UnionMoons_4},
-            {label: '<img src="legend/HyperRoute_3.png" /> Hyper Route', layer: layer_HyperRoute_3},
-            {label: '<img src="legend/AstroidField_2.png" /> Astroid Field', layer: layer_AstroidField_2},
-            {label: '<img src="legend/Debris_1.png" /> Debris', layer: layer_Debris_1},]},
+            {label: '<img src="legend/Star_8.png" /> Star', layer: layer_Star_8},
+            {label: '<img src="legend/GasGiant_7.png" /> Gas Giant', layer: layer_GasGiant_7},
+            {label: '<img src="legend/UnionPlanets_6.png" /> Union Planets', layer: layer_UnionPlanets_6},
+            {label: '<img src="legend/UnionMoons_5.png" /> Union Moons', layer: layer_UnionMoons_5},
+            {label: '<img src="legend/HyperRoute_4.png" /> Hyper Route', layer: layer_HyperRoute_4},
+            {label: '<img src="legend/AstroidField_3.png" /> Astroid Field', layer: layer_AstroidField_3},
+            {label: '<img src="legend/Debris_2.png" /> Debris', layer: layer_Debris_2},]},
         {label: '<b>Territory</b>',  selectAllCheckbox: true, children: [
+            {label: '<img src="legend/RepublicofAlkerrund_1.png" /> Republic of Alkerrund', layer: layer_RepublicofAlkerrund_1},
             {label: '<img src="legend/UnionTerritory_0.png" /> Union Territory', layer: layer_UnionTerritory_0},]},]
         var lay = L.control.layers.tree(null, overlaysTree,{
             //namedToggle: true,
