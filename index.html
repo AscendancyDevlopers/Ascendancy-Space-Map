@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="css/L.Control.Layers.Tree.css">
         <link rel="stylesheet" href="css/qgis2web.css">
         <link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet.photon.css">
         <style>
         html, body, #map {
             width: 100%;
@@ -35,6 +36,7 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
+        <script src="js/leaflet.photon.js"></script>
         <script src="data/UnionTerritory_0.js"></script>
         <script src="data/RepublicofAlkerrund_1.js"></script>
         <script src="data/Debris_2.js"></script>
@@ -47,11 +49,12 @@
         <script src="data/EnergySignature_9.js"></script>
         <script src="data/FrontierStation_10.js"></script>
         <script src="data/MiningStation_11.js"></script>
-        <script src="data/Grid_12.js"></script>
+        <script src="data/Fleet_12.js"></script>
+        <script src="data/Grid_13.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:false, maxZoom:26, minZoom:15
-        }).fitBounds([[-0.009274680599362454,0.018618884238086754],[-0.0070170221367794215,0.022824251484891908]]);
+        }).fitBounds([[-0.008922250970854528,0.019471887431469926],[-0.007652318086044994,0.02176172542168062]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -69,20 +72,53 @@
          }
          return tempDiv.innerHTML;
         }
-        // add class to format popup if it contains media
-		function addClassToPopupIfMedia(content, popup) {
-			var tempDiv = document.createElement('div');
-			tempDiv.innerHTML = content;
-			if (tempDiv.querySelector('td img')) {
-				popup._contentNode.classList.add('media');
-					// Delay to force the redraw
-					setTimeout(function() {
-						popup.update();
-					}, 10);
-			} else {
-				popup._contentNode.classList.remove('media');
-			}
-		}
+        // modify popup if contains media
+        function addClassToPopupIfMedia(content, popup) {
+            var tempDiv = document.createElement('div');
+            tempDiv.innerHTML = content;
+            var imgTd = tempDiv.querySelector('td img');
+            if (imgTd) {
+                var src = imgTd.getAttribute('src');
+                if (/\.(jpg|jpeg|png|gif|bmp|webp|avif)$/i.test(src)) {
+                    popup._contentNode.classList.add('media');
+                    setTimeout(function() {
+                        popup.update();
+                    }, 10);
+                } else if (/\.(mp3|wav|ogg|aac)$/i.test(src)) {
+                    var audio = document.createElement('audio');
+                    audio.controls = true;
+                    audio.src = src;
+                    imgTd.parentNode.replaceChild(audio, imgTd);
+                    popup._contentNode.classList.add('media');
+                    setTimeout(function() {
+                        popup.setContent(tempDiv.innerHTML);
+                        popup.update();
+                    }, 10);
+                } else if (/\.(mp4|webm|ogg|mov)$/i.test(src)) {
+                    var video = document.createElement('video');
+                    video.controls = true;
+                    video.src = src;
+                    video.style.width = "400px";
+                    video.style.height = "300px";
+                    video.style.maxHeight = "60vh";
+                    video.style.maxWidth = "60vw";
+                    imgTd.parentNode.replaceChild(video, imgTd);
+                    popup._contentNode.classList.add('media');
+                    // Aggiorna il popup quando il video carica i metadati
+                    video.addEventListener('loadedmetadata', function() {
+                        popup.update();
+                    });
+                    setTimeout(function() {
+                        popup.setContent(tempDiv.innerHTML);
+                        popup.update();
+                    }, 10);
+                } else {
+                    popup._contentNode.classList.remove('media');
+                }
+            } else {
+                popup._contentNode.classList.remove('media');
+            }
+        }
         var title = new L.Control({'position':'bottomleft'});
         title.onAdd = function (map) {
             this._div = L.DomUtil.create('div', 'info');
@@ -708,7 +744,61 @@
         });
         bounds_group.addLayer(layer_MiningStation_11);
         map.addLayer(layer_MiningStation_11);
-        function pop_Grid_12(feature, layer) {
+        function pop_Fleet_12(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(String(feature.properties['Name']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Info</th>\
+                        <td>' + (feature.properties['Info'] !== null ? autolinker.link(String(feature.properties['Info']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Owner</th>\
+                        <td>' + (feature.properties['Owner'] !== null ? autolinker.link(String(feature.properties['Owner']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_Fleet_12_0() {
+            return {
+                pane: 'pane_Fleet_12',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/Fleet_12.svg',
+            iconSize: [41.8, 41.8]
+        }),
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Fleet_12');
+        map.getPane('pane_Fleet_12').style.zIndex = 412;
+        map.getPane('pane_Fleet_12').style['mix-blend-mode'] = 'normal';
+        var layer_Fleet_12 = new L.geoJson(json_Fleet_12, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Fleet_12',
+            layerName: 'layer_Fleet_12',
+            pane: 'pane_Fleet_12',
+            onEachFeature: pop_Fleet_12,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_Fleet_12_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Fleet_12);
+        map.addLayer(layer_Fleet_12);
+        function pop_Grid_13(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(String(feature.properties['fid']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
@@ -736,9 +826,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Grid_12_0() {
+        function style_Grid_13_0() {
             return {
-                pane: 'pane_Grid_12',
+                pane: 'pane_Grid_13',
                 opacity: 1,
                 color: 'rgba(216,125,43,0.45098039215686275)',
                 dashArray: '',
@@ -749,23 +839,25 @@
                 interactive: false,
             }
         }
-        map.createPane('pane_Grid_12');
-        map.getPane('pane_Grid_12').style.zIndex = 412;
-        map.getPane('pane_Grid_12').style['mix-blend-mode'] = 'normal';
-        var layer_Grid_12 = new L.geoJson(json_Grid_12, {
+        map.createPane('pane_Grid_13');
+        map.getPane('pane_Grid_13').style.zIndex = 413;
+        map.getPane('pane_Grid_13').style['mix-blend-mode'] = 'normal';
+        var layer_Grid_13 = new L.geoJson(json_Grid_13, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Grid_12',
-            layerName: 'layer_Grid_12',
-            pane: 'pane_Grid_12',
-            onEachFeature: pop_Grid_12,
-            style: style_Grid_12_0,
+            dataVar: 'json_Grid_13',
+            layerName: 'layer_Grid_13',
+            pane: 'pane_Grid_13',
+            onEachFeature: pop_Grid_13,
+            style: style_Grid_13_0,
         });
-        bounds_group.addLayer(layer_Grid_12);
-        map.addLayer(layer_Grid_12);
+        bounds_group.addLayer(layer_Grid_13);
+        map.addLayer(layer_Grid_13);
         var overlaysTree = [
         {label: '<b>Map Overlays</b>',  selectAllCheckbox: true, children: [
-            {label: '<img src="legend/Grid_12.png" /> Grid', layer: layer_Grid_12},]},
+            {label: '<img src="legend/Grid_13.png" /> Grid', layer: layer_Grid_13},]},
+        {label: '<b>Space Assets</b>',  selectAllCheckbox: true, children: [
+            {label: '<img src="legend/Fleet_12.png" /> Fleet', layer: layer_Fleet_12},]},
         {label: '<b>Infrastructure</b>',  selectAllCheckbox: true, children: [
             {label: '<img src="legend/MiningStation_11.png" /> Mining Station', layer: layer_MiningStation_11},
             {label: '<img src="legend/FrontierStation_10.png" /> Frontier Station', layer: layer_FrontierStation_10},
@@ -842,6 +934,6 @@
             }  
         });       
         setBounds();
-        </script>
+        </script>        
     </body>
 </html>

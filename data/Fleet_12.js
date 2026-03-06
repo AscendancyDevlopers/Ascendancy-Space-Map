@@ -1,0 +1,1 @@
+var json_Fleet_12 = {"type":"FeatureCollection","name":"Fleet_12","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"id":"1","Name":"Unknown","Info":"Unknown","Owner":"Unknown"},"geometry":{"type":"Point","coordinates":[0.020530381884596,-0.007553999861103]}}]}
