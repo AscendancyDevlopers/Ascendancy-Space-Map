@@ -1,0 +1,1 @@
+var json_Fleet_13 = {"type":"FeatureCollection","name":"Fleet_13","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"id":"1","Name":"Unknown","Info":"Unknown","Owner":"Grand Republic of Allkerund"},"geometry":{"type":"Point","coordinates":[0.020384766760049,-0.008168565891881]}}]}
